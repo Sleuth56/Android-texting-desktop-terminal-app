@@ -54,10 +54,24 @@ SOCKET.bind((IP, PORT))
 SOCKET.listen(1)
 (CLIENTSOCKET, ADDRESS) = SOCKET.accept()
 
+print('to exit type exit')
 while True:
-    NUMBER = encrypt(input('Number: '))
-    MESSAGE = encrypt(input('Message: '))
-    CLIENTSOCKET.send(encrypt('sendtext'))
+    NUMBER = encrypt(input("Number: "))
+    if(NUMBER == 'exit'):
+        CLIENTSOCKET.send(encrypt('exit'))
+        time.sleep(0.4)
+        CLIENTSOCKET.close()
+        SOCKET.close()
+        sys.exit()
+
+    MESSAGE = encrypt(input("Message: "))
+    if(MESSAGE == 'exit'):
+        CLIENTSOCKET.send(encrypt('exit'))
+        time.sleep(0.4)
+        CLIENTSOCKET.close()
+        SOCKET.close()
+        sys.exit()
+    CLIENTSOCKET.send(encrypt('send text'))
     time.sleep(0.2)
     CLIENTSOCKET.send(NUMBER)
     time.sleep(0.2)
