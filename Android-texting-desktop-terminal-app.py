@@ -36,7 +36,7 @@ def decrypt(MESSAGE):
 
 def incomming_texts():
     PORT2 = 8889
-    IP2 = '0.0.0.0'
+    IP2 = '192.168.1.149'
 
     SOCKET2 = socket(AF_INET, SOCK_STREAM)
     SOCKET2.bind((IP2, PORT2))
@@ -46,6 +46,7 @@ def incomming_texts():
     while True:
         TEST2 = CLIENTSOCKET2.recv(1024)
         print(bytes.decode(decrypt(TEST2)))
+
 
 # Definging the serversocket variable and setting it to use the TCP protocol
 SOCKET = socket(AF_INET, SOCK_STREAM)
