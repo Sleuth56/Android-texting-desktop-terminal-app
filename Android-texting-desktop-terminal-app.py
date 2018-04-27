@@ -3,7 +3,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 import threading
 import pyaes
 import sys
-import subprocess
+import time
 
 PORT = 8888
 IP = '0.0.0.0'
@@ -54,10 +54,11 @@ SOCKET.bind((IP, PORT))
 SOCKET.listen(1)
 (CLIENTSOCKET, ADDRESS) = SOCKET.accept()
 
-try:
-    threading.incomming_texts(incomming_texts, ())
-except:
-    print("Error: unable to start thread")
-
 while True:
-    command = input(': ')
+    NUMBER = encrypt(input('Number: '))
+    MESSAGE = encrypt(input('Message: '))
+    CLIENTSOCKET.send(encrypt('sendtext'))
+    time.sleep(0.2)
+    CLIENTSOCKET.send(NUMBER)
+    time.sleep(0.2)
+    CLIENTSOCKET.send(MESSAGE)
