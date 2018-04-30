@@ -5,6 +5,8 @@ import sys
 import time
 
 PORT = 8888
+PORT2 = 8889
+
 IP = '0.0.0.0'
 
 try:
@@ -34,11 +36,8 @@ def decrypt(MESSAGE):
 
 
 def incomming_texts():
-    PORT2 = 8889
-    IP2 = '192.168.1.149'
-
     SOCKET2 = socket(AF_INET, SOCK_STREAM)
-    SOCKET2.bind((IP2, PORT2))
+    SOCKET2.bind((IP, PORT2))
     SOCKET2.listen(1)
     (CLIENTSOCKET2, ADDRESS2) = SOCKET.accept()
 
