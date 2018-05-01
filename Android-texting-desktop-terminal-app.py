@@ -39,7 +39,7 @@ def incomming_texts():
     SOCKET2 = socket(AF_INET, SOCK_STREAM)
     SOCKET2.bind((IP, PORT2))
     SOCKET2.listen(1)
-    (CLIENTSOCKET2, ADDRESS2) = SOCKET.accept()
+    (CLIENTSOCKET2, ADDRESS2) = SOCKET2.accept()
 
     while True:
         TEST2 = CLIENTSOCKET2.recv(1024)
