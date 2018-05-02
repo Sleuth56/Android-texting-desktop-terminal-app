@@ -1,5 +1,6 @@
 """The companion app for my Android Termux scrypt"""
 from socket import socket, AF_INET, SOCK_STREAM
+import threading
 import pyaes
 import sys
 import time
@@ -39,17 +40,18 @@ def incomming_texts():
     print('incomming_texts thread started')
     SOCKET2 = socket(AF_INET, SOCK_STREAM)
     SOCKET2.bind((IP, PORT2))
-    print('started server on port ' + str(PORT))
+    print('started server on port ' + str(PORT2))
     SOCKET2.listen(1)
     (CLIENTSOCKET2, ADDRESS2) = SOCKET2.accept()
 
     while True:
-        TEST2 = CLIENTSOCKET2.recv(1024)
-        print(decrypt(TEST2))
+        TEXT2 = CLIENTSOCKET2.recv(1024)
+        print(decrypt(TEXT2))
 
 
-newthread = incomming_texts()
-newthread.start()
+incomming_texts_thread = threading.Thread(target=incomming_texts)
+incomming_texts_thread.daemon = True
+incomming_texts_thread.start()
 
 # Definging the serversocket variable and setting it to use the TCP protocol
 SOCKET = socket(AF_INET, SOCK_STREAM)
@@ -57,6 +59,7 @@ SOCKET.bind((IP, PORT))
 SOCKET.listen(1)
 print('started server on port ' + str(PORT))
 (CLIENTSOCKET, ADDRESS) = SOCKET.accept()
+print('connected')
 
 print('to exit type exit')
 print()
