@@ -36,14 +36,16 @@ def decrypt(MESSAGE):
 
 
 def incomming_texts():
+    print('incomming_texts thread started')
     SOCKET2 = socket(AF_INET, SOCK_STREAM)
     SOCKET2.bind((IP, PORT2))
+    print('started server on port ' + str(PORT))
     SOCKET2.listen(1)
     (CLIENTSOCKET2, ADDRESS2) = SOCKET2.accept()
 
     while True:
         TEST2 = CLIENTSOCKET2.recv(1024)
-        print(bytes.decode(decrypt(TEST2)))
+        print(decrypt(TEST2))
 
 
 newthread = incomming_texts()
@@ -53,6 +55,7 @@ newthread.start()
 SOCKET = socket(AF_INET, SOCK_STREAM)
 SOCKET.bind((IP, PORT))
 SOCKET.listen(1)
+print('started server on port ' + str(PORT))
 (CLIENTSOCKET, ADDRESS) = SOCKET.accept()
 
 print('to exit type exit')
