@@ -45,8 +45,8 @@ def incomming_texts():
     (CLIENTSOCKET2, ADDRESS2) = SOCKET2.accept()
 
     while True:
-        TEXT2 = CLIENTSOCKET2.recv(1024)
-        print(decrypt(TEXT2))
+        TEXT2 = decrypt(CLIENTSOCKET2.recv(1024))
+        print(TEXT2)
 
 
 incomming_texts_thread = threading.Thread(target=incomming_texts)
